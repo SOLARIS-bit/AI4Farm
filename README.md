@@ -77,5 +77,3 @@ For **MIT Solve 2025 Challenge**
 Aivancity School of Technology, Business & Society
 
 ```
-
----
