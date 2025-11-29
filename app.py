@@ -3,6 +3,7 @@ import pandas as pd
 from fpdf import FPDF
 import io
 from datetime import datetime
+import re
 
 # Page configuration
 st.set_page_config(
@@ -199,38 +200,50 @@ if st.button(T("🌾 Analyze Soil", "🌾 Analyser le sol")):
             "- Le sol est sain\n- Maintenez les pratiques actuelles\n- Évitez le sur-arrosage et l'excès d'engrais"
         ))
 
-    # PDF generation function (returns bytes)
-    def generate_pdf_bytes(score, risk, moisture_status, organic_status, rain_status,
-                           soil_texture, soil_color, crop, lat, lon):
-        pdf = FPDF()
-        pdf.add_page()
-        pdf.set_font("Arial", "B", 14)
-        pdf.cell(0, 8, "AI4Farm Soil Health Report", ln=True, align="C")
-        pdf.ln(6)
-        pdf.set_font("Arial", size=11)
-        pdf.cell(0, 6, f"Date: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}", ln=True)
-        if lat and lon:
-            pdf.cell(0, 6, f"Location: {lat}, {lon}", ln=True)
-        pdf.ln(4)
-        pdf.set_font("Arial", "B", 12)
-        pdf.cell(0, 7, f"Score: {score}/100", ln=True)
-        pdf.set_font("Arial", size=11)
-        pdf.cell(0, 6, f"Risk Level: {risk}", ln=True)
-        pdf.ln(3)
-        pdf.cell(0, 6, f"Moisture: {moisture_status}", ln=True)
-        pdf.cell(0, 6, f"Organic Matter: {organic_status}", ln=True)
-        pdf.cell(0, 6, f"Rainfall (7d): {rain_status}", ln=True)
-        pdf.cell(0, 6, f"Soil Texture: {soil_texture}", ln=True)
-        pdf.cell(0, 6, f"Soil Color: {soil_color}", ln=True)
-        pdf.cell(0, 6, f"Crop: {crop}", ln=True)
-        pdf.ln(6)
-        pdf.multi_cell(0, 6, T(
+def remove_non_ascii(text):
+    # Remove emojis and non-latin characters
+    return re.sub(r'[^\x00-\x7F]+', '', text)
+
+def generate_pdf_bytes(score, risk, moisture_status, organic_status, rain_status,
+                       soil_texture, soil_color, crop, lat, lon):
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", "B", 14)
+    pdf.cell(0, 8, remove_non_ascii("AI4Farm Soil Health Report"), ln=True, align="C")
+    pdf.ln(6)
+
+    pdf.set_font("Arial", size=11)
+    pdf.cell(0, 6, f"Date: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}", ln=True)
+
+    if lat and lon:
+        pdf.cell(0, 6, f"Location: {lat}, {lon}", ln=True)
+
+    pdf.ln(4)
+
+    pdf.set_font("Arial", "B", 12)
+    pdf.cell(0, 7, f"Score: {score}/100", ln=True)
+
+    pdf.set_font("Arial", size=11)
+    pdf.cell(0, 6, remove_non_ascii(f"Risk Level: {risk}"), ln=True)
+    pdf.cell(0, 6, remove_non_ascii(f"Moisture: {moisture_status}"), ln=True)
+    pdf.cell(0, 6, remove_non_ascii(f"Organic Matter: {organic_status}"), ln=True)
+    pdf.cell(0, 6, remove_non_ascii(f"Rainfall (7d): {rain_status}"), ln=True)
+    pdf.cell(0, 6, remove_non_ascii(f"Soil Texture: {soil_texture}"), ln=True)
+    pdf.cell(0, 6, remove_non_ascii(f"Soil Color: {soil_color}"), ln=True)
+    pdf.cell(0, 6, remove_non_ascii(f"Crop: {crop}"), ln=True)
+
+    pdf.ln(6)
+    pdf.set_font("Arial", size=11)
+    pdf.multi_cell(0, 6, remove_non_ascii(
+        T(
             "Notes: This is a conceptual soil health estimation tool for educational purposes. It does not replace laboratory analysis.",
-            "Remarques : Ceci est une estimation conceptuelle de la santé du sol à des fins éducatives. Elle ne remplace pas les analyses de laboratoire."
-        ))
-        # Output to bytes
-        s = pdf.output(dest='S').encode('latin-1')
-        return s
+            "Remarques : Ceci est une estimation conceptuelle de la sante du sol a des fins educatives. Elle ne remplace pas les analyses de laboratoire."
+        )
+    ))
+
+    # Output to bytes
+    s = pdf.output(dest="S").encode("latin-1", "ignore")
+    return s
 
     # Download button for PDF
     pdf_bytes = generate_pdf_bytes(score, risk, moisture_status, organic_status, rain_status,
