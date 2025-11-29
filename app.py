@@ -261,37 +261,38 @@ if st.button(T("🌾 Analyze Soil", "🌾 Analyser le sol")):
     else:
         risk = T("✅ Low Risk — Healthy Soil", "✅ Risque faible — Sol sain")
         risk_color = "green"
+        
     if st.button(T("💡 Explain this result (AI style)", "💡 Expliquer ce resultat (style IA)")):
-    st.info(T(
-        f"""
-The model identified several key factors affecting the soil health:
+       st.info(T(
+           f"""
+   The model identified several key factors affecting the soil health:
 
-• **Soil Color:** {soil_color}  
-• **Soil Texture:** {soil_texture}  
-• **Moisture Level:** {moisture}%  
-• **Organic Matter:** {organic}%  
-• **Rainfall:** {rainfall} mm  
+   • **Soil Color:** {soil_color}  
+   • **Soil Texture:** {soil_texture}  
+   • **Moisture Level:** {moisture}%  
+   • **Organic Matter:** {organic}%  
+   • **Rainfall:** {rainfall} mm  
 
-These factors combined to generate a final soil health score of **{score}/100**, 
-placing your soil in the category: **{risk}**.
+   These factors combined to generate a final soil health score of **{score}/100**, 
+   placing your soil in the category: **{risk}**.
 
-This mirrors how small agricultural AI systems analyze soil profiles.
-""",
-        f"""
-Le modele a identifie plusieurs facteurs influant sur la sante du sol :
+   This mirrors how small agricultural AI systems analyze soil profiles.
+   """,
+           f"""
+   Le modele a identifie plusieurs facteurs influant sur la sante du sol :
 
-• **Couleur du sol :** {soil_color}  
-• **Texture :** {soil_texture}  
-• **Humidite :** {moisture}%  
-• **Matiere organique :** {organic}%  
-• **Pluie :** {rainfall} mm  
+   • **Couleur du sol :** {soil_color}  
+   • **Texture :** {soil_texture}  
+   • **Humidite :** {moisture}%  
+   • **Matiere organique :** {organic}%  
+   • **Pluie :** {rainfall} mm  
 
-Ces facteurs ont genere un score final de **{score}/100**, 
-classant votre sol dans la categorie : **{risk}**.
+   Ces facteurs ont genere un score final de **{score}/100**, 
+   classant votre sol dans la categorie : **{risk}**.
 
-Cela reproduit la logique des systemes IA agricoles.
-"""
-    ))
+   Cela reproduit la logique des systemes IA agricoles.
+   """
+       ))
 
     # Display results (report card)
     st.markdown("---")
