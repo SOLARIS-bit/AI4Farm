@@ -12,12 +12,58 @@ st.set_page_config(
     layout="centered",
 )
 
-# Branding / logo header
+# Branding header (always displays)
 st.markdown("""
-<div style='text-align:center;'>
-    <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/74/Icon_soil.svg/512px-Icon_soil.svg.png' 
-         width='90' style='margin-bottom:10px;'/>
+<style>
+.header-container {
+    text-align: center;
+    padding: 10px 0;
+}
+.header-logo {
+    width: 100px;
+    margin-bottom: -10px;
+}
+.header-title {
+    font-size: 42px;
+    font-weight: 800;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.header-sub {
+    font-size: 18px;
+    color: #6c757d;
+    margin-top: 0px;
+}
+</style>
+
+<div class="header-container">
+    <img class="header-logo" src="https://raw.githubusercontent.com/SOLARIS-bit/ai4farm/main/static/ai4farm_logo.png" />
+    <h1 class="header-title">AI4Farm</h1>
+    <p class="header-sub">Smart Soil Intelligence for Small Farmers</p>
 </div>
+""", unsafe_allow_html=True)
+
+# Global UI polishing
+st.markdown("""
+<style>
+.report-box {
+    padding: 18px;
+    background-color: #f9fafb;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 15px;
+}
+.section-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-top: 20px;
+}
+.recommend-box {
+    padding: 14px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+</style>
 """, unsafe_allow_html=True)
 
 # Language selector (English / Français)
@@ -84,12 +130,67 @@ with col2:
 
 st.markdown("---")
 
-# Help text and how it works
-with st.expander(T("How AI4Farm estimates soil health (short)", "Comment AI4Farm estime la santé du sol (bref)")):
+with st.expander(T("🤖 How the AI-inspired model works", "🤖 Comment fonctionne le modele inspire de l'IA")):
     st.write(T(
-        "AI4Farm combines simple user inputs with public data and a lightweight scoring model to provide a Soil Health Score and actionable recommendations. This is a conceptual tool and not a laboratory test.",
-        "AI4Farm combine des entrées simples, des données publiques et un modèle de scoring léger pour fournir un score de santé du sol et des recommandations actionnables. C'est un outil conceptuel, pas un test de laboratoire."
+        """
+AI4Farm uses a lightweight scoring model inspired by AI decision-making.
+It does **not** replace laboratory soil analysis, but it follows the same reasoning pattern used in agricultural AI systems:
+
+### 1. Feature Extraction
+The system analyzes 6 key factors:
+- Soil color  
+- Soil texture  
+- Moisture  
+- Organic matter  
+- Rainfall  
+- Crop type  
+
+### 2. Weighted Scoring
+Each factor modifies the Soil Health Score using a weight:
+- Loamy soil is rewarded  
+- Pale soil color is penalized  
+- Optimal moisture boosts the score  
+- Low organic matter strongly reduces the score  
+
+### 3. Risk Classification
+Finally, the score is mapped to:
+- **Healthy Soil (70–100)**  
+- **Average Soil (40–69)**  
+- **Unhealthy Soil (0–39)**  
+
+This mimics how small ML models classify soil quality.
+
+""",
+"""
+AI4Farm utilise un modele de scoring leger inspire des systemes d'IA agricoles.
+Il ne remplace pas une analyse de laboratoire, mais il reproduit les etapes logiques d'un modele IA :
+
+### 1. Extraction des caracteristiques
+Le systeme analyse 6 facteurs :
+- Couleur du sol  
+- Texture du sol  
+- Humidite  
+- Matiere organique  
+- Pluie  
+- Type de culture  
+
+### 2. Pondérations
+Chaque facteur influence le score :
+- Le sol limoneux est favorise  
+- Le sol pale est penalise  
+- L'humidite optimale augmente le score  
+- Une faible matiere organique reduit fortement le score  
+
+### 3. Classification du risque
+Le score final correspond a :
+- **Sol sain (70–100)**  
+- **Sol moyen (40–69)**  
+- **Sol degrade (0–39)**  
+
+Cela imite la logique des petits modeles IA de classification du sol.
+"""
     ))
+
 
 # Scoring factors
 color_factor = {"Dark": 15, "Brown": 5, "Reddish": -5, "Pale": -10}
@@ -160,6 +261,37 @@ if st.button(T("🌾 Analyze Soil", "🌾 Analyser le sol")):
     else:
         risk = T("✅ Low Risk — Healthy Soil", "✅ Risque faible — Sol sain")
         risk_color = "green"
+    if st.button(T("💡 Explain this result (AI style)", "💡 Expliquer ce resultat (style IA)")):
+    st.info(T(
+        f"""
+The model identified several key factors affecting the soil health:
+
+• **Soil Color:** {soil_color}  
+• **Soil Texture:** {soil_texture}  
+• **Moisture Level:** {moisture}%  
+• **Organic Matter:** {organic}%  
+• **Rainfall:** {rainfall} mm  
+
+These factors combined to generate a final soil health score of **{score}/100**, 
+placing your soil in the category: **{risk}**.
+
+This mirrors how small agricultural AI systems analyze soil profiles.
+""",
+        f"""
+Le modele a identifie plusieurs facteurs influant sur la sante du sol :
+
+• **Couleur du sol :** {soil_color}  
+• **Texture :** {soil_texture}  
+• **Humidite :** {moisture}%  
+• **Matiere organique :** {organic}%  
+• **Pluie :** {rainfall} mm  
+
+Ces facteurs ont genere un score final de **{score}/100**, 
+classant votre sol dans la categorie : **{risk}**.
+
+Cela reproduit la logique des systemes IA agricoles.
+"""
+    ))
 
     # Display results (report card)
     st.markdown("---")
