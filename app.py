@@ -12,34 +12,16 @@ st.set_page_config(
     layout="centered",
 )
 
-# Branding header (always displays)
-st.markdown("""
-<style>
-.header-container {
-    text-align: center;
-    padding: 10px 0;
-}
-.header-logo {
-    width: 100px;
-    margin-bottom: -10px;
-}
-.header-title {
-    font-size: 42px;
-    font-weight: 800;
-    margin-top: 0;
-    margin-bottom: 0;
-}
-.header-sub {
-    font-size: 18px;
-    color: #6c757d;
-    margin-top: 0px;
-}
-</style>
+# Branding header
+LOGO_URL = "https://raw.githubusercontent.com/SOLARIS-bit/ai4farm/main/static/ChatGPT Image 29 nov 2025, 11_27_54 a.m..png"
 
-<div class="header-container">
-    <img class="header-logo" src="https://raw.githubusercontent.com/SOLARIS-bit/ai4farm/main/static/ai4farm_logo.png" />
-    <h1 class="header-title">AI4Farm</h1>
-    <p class="header-sub">Smart Soil Intelligence for Small Farmers</p>
+st.markdown(f"""
+<div style='text-align:center; margin-bottom:10px;'>
+    <img src='{LOGO_URL}' style='width:120px; margin-bottom:0px;'/>
+    <h1 style='font-size:42px; font-weight:700; margin-bottom:0;'>AI4Farm</h1>
+    <p style='font-size:18px; color:#6c757d; margin-top:2px;'>
+        Smart Soil Intelligence for Small Farmers
+    </p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -71,17 +53,6 @@ lang = st.radio("Language / Langue", ["English", "Français"], index=0, horizont
 
 def T(en, fr):
     return fr if lang == "Français" else en
-
-# Title and subtitle
-st.markdown(f"""
-<div style='text-align: center;'>
-    <h1>🌱 AI4Farm</h1>
-    <h3>{T("Soil Health Estimator for Small Farmers", "Estimateur de la santé des sols pour petits agriculteurs")}</h3>
-    <p style='color: gray;'>{T("Smart, simple and accessible crop decision support", "Support décisionnel simple, accessible et intelligent pour les cultures")}</p>
-</div>
-""", unsafe_allow_html=True)
-
-st.markdown("---")
 
 # Optional: farm location picker (latitude / longitude)
 st.subheader(T("📍 Farm Location (optional)", "📍 Emplacement de la ferme (optionnel)"))
