@@ -4,6 +4,7 @@
 ![Live Streamlit App](https://img.shields.io/badge/Live_App-Online-brightgreen?style=for-the-badge)
 ![Python](https://img.shields.io/badge/Python-3.10-blue?style=for-the-badge)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Framework-FF4B4B?style=for-the-badge)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 ``` 
 
 AI4Farm is a lightweight, AI-inspired soil health assessment tool designed for smallholder farmers. It computes a Soil Health Score (0–100) and provides actionable recommendations based on inputs such as moisture, organic matter, texture, rainfall, and soil color.
