@@ -18,7 +18,7 @@ def T(en, fr):
 # ------------------------------------------------------
 # PREMIUM LOGO HEADER
 # ------------------------------------------------------
-LOGO_URL = "https://raw.githubusercontent.com/YOUR_USERNAME/ai4farm/main/static/logo.png"
+LOGO_URL = "https://raw.githubusercontent.com/SOLARIS-bit/ai4farm/main/static/ChatGPT Image 29 nov 2025, 11_27_54 a.m..png"
 
 st.markdown(f"""
     <div style='text-align:center; margin-top: -10px; margin-bottom: 10px;'>
@@ -248,16 +248,19 @@ Ce raisonnement imite la logique des petits modèles IA agricoles.
 def generate_pdf():
     pdf = FPDF()
     pdf.add_page()
-    pdf.set_font("Arial", size=14)
-    pdf.cell(200, 10, txt="AI4Farm – Soil Health Report", ln=1, align='C')
 
-    pdf.set_font("Arial", size=12)
+    # UTF-8 font
+    pdf.add_font("DejaVu", "", fname="DejaVuSans.ttf", uni=True)
+    pdf.set_font("DejaVu", "", 14)
+
+    pdf.cell(0, 10, txt="AI4Farm – Soil Health Report", ln=True, align='C')
+
+    pdf.set_font("DejaVu", "", 12)
     pdf.ln(5)
     pdf.cell(0, 10, f"Soil Health Score: {score}/100", ln=True)
     pdf.cell(0, 10, f"Risk Category: {risk}", ln=True)
     pdf.ln(5)
 
-    pdf.set_font("Arial", size=11)
     pdf.multi_cell(0, 8, f"""
 Soil Color: {soil_color}
 Soil Texture: {soil_texture}
@@ -267,13 +270,4 @@ Rainfall: {rainfall} mm
 Crop: {crop}
 """)
 
-    return pdf.output(dest="S").encode("latin-1", errors="ignore")
-
-pdf_bytes = generate_pdf()
-
-st.download_button(
-    label=T("📄 Download Soil Report (PDF)", "📄 Télécharger le rapport (PDF)"),
-    data=pdf_bytes,
-    file_name="soil_report_ai4farm.pdf",
-    mime="application/pdf"
-)
+    return pdf.output(dest="S").encode("utf-8")
