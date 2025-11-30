@@ -300,39 +300,38 @@ if st.button("🌾 " + T("Analyze Soil","Analyser le sol")):
     # ----------------------------------
     # 📄 PDF EXPORT (FIXED FOR UNICODE)
     # ----------------------------------
-def remove_non_ascii(txt):
-    import re
-    return re.sub(r"[^\x00-\x7F]+","",txt)
+    def remove_non_ascii(txt)
+        return re.sub(r"[^\x00-\x7F]+","",txt)
 
-def generate_pdf_bytes(score, risk, moisture_status, organic_status, rain_status, lat="", lon=""):
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Helvetica","B",14)  # Use Helvetica
-    pdf.cell(0, 8, "AI4Farm Soil Health Report", new_x=pdf.l_margin, new_y=pdf.y)
-    pdf.ln(4)
-    pdf.set_font("Helvetica", "", 11)
+    def generate_pdf_bytes(score, risk, moisture_status, organic_status, rain_status, lat="", lon=""):
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_font("Helvetica","B",14)  # Use Helvetica
+        pdf.cell(0, 8, "AI4Farm Soil Health Report", new_x=pdf.l_margin, new_y=pdf.y)
+        pdf.ln(4)
+        pdf.set_font("Helvetica", "", 11)
     
-    now = datetime.now(timezone.utc)
-    pdf.cell(0,6,f"Date: {now.strftime('%Y-%m-%d %H:%M UTC')}", new_x=pdf.l_margin, new_y=pdf.y)
-    if lat and lon:
-        pdf.cell(0,6,f"Location: {lat}, {lon}", new_x=pdf.l_margin, new_y=pdf.y)
+        now = datetime.now(timezone.utc)
+        pdf.cell(0,6,f"Date: {now.strftime('%Y-%m-%d %H:%M UTC')}", new_x=pdf.l_margin, new_y=pdf.y)
+        if lat and lon:
+            pdf.cell(0,6,f"Location: {lat}, {lon}", new_x=pdf.l_margin, new_y=pdf.y)
     
-    pdf.ln(4)
-    pdf.cell(0,6,remove_non_ascii(f"Score: {score}/100"), new_x=pdf.l_margin, new_y=pdf.y)
-    pdf.cell(0,6,remove_non_ascii(f"Risk: {risk}"), new_x=pdf.l_margin, new_y=pdf.y)
-    pdf.cell(0,6,remove_non_ascii(f"Moisture: {moisture_status}"), new_x=pdf.l_margin, new_y=pdf.y)
-    pdf.cell(0,6,remove_non_ascii(f"Organic Matter: {organic_status}"), new_x=pdf.l_margin, new_y=pdf.y)
-    pdf.cell(0,6,remove_non_ascii(f"Rainfall: {rain_status}"), new_x=pdf.l_margin, new_y=pdf.y)
+        pdf.ln(4)
+        pdf.cell(0,6,remove_non_ascii(f"Score: {score}/100"), new_x=pdf.l_margin, new_y=pdf.y)
+        pdf.cell(0,6,remove_non_ascii(f"Risk: {risk}"), new_x=pdf.l_margin, new_y=pdf.y)
+        pdf.cell(0,6,remove_non_ascii(f"Moisture: {moisture_status}"), new_x=pdf.l_margin, new_y=pdf.y)
+        pdf.cell(0,6,remove_non_ascii(f"Organic Matter: {organic_status}"), new_x=pdf.l_margin, new_y=pdf.y)
+        pdf.cell(0,6,remove_non_ascii(f"Rainfall: {rain_status}"), new_x=pdf.l_margin, new_y=pdf.y)
     
-    pdf.ln(6)
-    pdf.multi_cell(0,6,
-        remove_non_ascii(
-            "This is a conceptual soil health estimation tool. Not a laboratory analysis."
+        pdf.ln(6)
+        pdf.multi_cell(0,6,
+            remove_non_ascii(
+                "This is a conceptual soil health estimation tool. Not a laboratory analysis."
+            )
         )
-    )
     
-    # Return bytes directly (do NOT call encode)
-    return pdf.output(dest="S")
+        # Return bytes directly (do NOT call encode)
+        return pdf.output(dest="S")
 
 # Example usage:
 pdf_bytes = generate_pdf_bytes(score, risk, moisture_status, organic_status, rain_status, lat, lon)
