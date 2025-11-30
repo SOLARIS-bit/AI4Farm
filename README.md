@@ -21,16 +21,12 @@ This project was created for the **MIT Solve Challenge** and for academic work a
 
 ## ✨ Features
 
-- UI with sections, icons, and modern layout  
-- Soil health scoring (0–100)  
-- Risk analysis (Low / Medium / High)  
-- Recommendations engine  
-- Weather & soil parameters  
-- Multi-language mode (English & French)  
-- Exportable PDF soil report  
-- Interactive map to capture farm location  
-- Ready for low-resource deployments  
-
+* **🌍 Multilingual Support:** seamless toggling between English and French for broader accessibility in West/Central Africa and global contexts.
+* **🧠 Intelligent Scoring Algorithm:** Calculates a 0-100 health score based on weighted agronomic principles.
+* **📍 Geolocation Mapping:** Visualizes farm location using Latitude/Longitude inputs.
+* **🌾 Personalized Recommendations:** Provides specific advice based on risk levels (e.g., "Add compost," "Improve drainage").
+* **📄 PDF Export:** Generates a downloadable, timestamped report for offline record-keeping.
+* **🎨 Eco-Friendly UI:** A custom-styled dark/green theme designed to be easy on the eyes.
 ---
 
 ## 📂 Project Structure
@@ -64,11 +60,12 @@ streamlit run app.py
 
 ---
 
-## 🔧 Technologies
+## 🛠️ Tech Stack
 
-* Python
-* Streamlit
-* FPDF (for PDF export)
+* **Frontend:** [Streamlit](https://streamlit.io/) (Python framework for data apps)
+* **Data Processing:** [Pandas](https://pandas.pydata.org/)
+* **Report Generation:** [FPDF](https://pyfpdf.readthedocs.io/)
+* **Logic:** Custom Python algorithms
 
 ---
 
@@ -77,5 +74,3 @@ streamlit run app.py
 Developed by **Kennedy MBA**
 Aivancity School of Technology, Business & Society
 2025
-
-````
