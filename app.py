@@ -333,15 +333,22 @@ if st.button("🌾 " + T("Analyze Soil","Analyser le sol")):
         # Return bytes directly (do NOT call encode)
         return pdf.output(dest="S")
 
-# Example usage:
-pdf_bytes = generate_pdf_bytes(score, risk, moisture_status, organic_status, rain_status, lat, lon)
-
-st.download_button(
-    label="📄 Download PDF Report",
-    data=pdf_bytes,
-    file_name="AI4Farm_Soil_Report.pdf",
-    mime="application/pdf"
-)
+        # Example usage:
+        pdf_bytes = generate_pdf_bytes(
+                score, 
+                risk, 
+                moisture_status, 
+                organic_status, 
+                rain_status, 
+                lat, 
+                lon
+            )
+        st.download_button(
+            label="📄 Download PDF Report",
+            data=pdf_bytes,
+            file_name="AI4Farm_Soil_Report.pdf",
+            mime="application/pdf"
+        )
 # ----------------------------------
 # 🌻 FOOTER
 # ----------------------------------
