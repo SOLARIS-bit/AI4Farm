@@ -18,15 +18,12 @@ st.set_page_config(
 # ----------------------------------
 st.markdown("""
 <div style='text-align:center; padding:25px 10px 10px 10px;'>
-    <h1 style='font-size:48px; margin-bottom:0;'>
-        🌱 AI4Farm
-    </h1>
-    <p style='color:#4a4a4a; font-size:20px; margin-top:6px;'>
+    <h1 style='font-size:48px; margin-bottom:0; text-shadow: 1px 1px 2px #000;'>🌱 AI4Farm</h1>
+    <p style='color:#c0ffc0; font-size:20px; margin-top:6px; text-shadow: 1px 1px 2px #000;'>
         Smart Soil Intelligence for Small Farmers
     </p>
 </div>
 """, unsafe_allow_html=True)
-
 # ----------------------------------
 # 🌿 ECO BACKGROUND STYLE
 # ----------------------------------
@@ -46,24 +43,36 @@ st.markdown("""
 
 # ----------------------------------
 # 🌳 GREEN CARD CSS
-# ----------------------------------
+# --------------------------------
 st.markdown("""
 <style>
-.green-card {
-    background-color: #e7f5e9;
-    padding: 22px;
-    border-radius: 16px;
-    box-shadow: 0px 4px 18px rgba(0, 128, 0, 0.10);
-    margin-bottom: 22px;
-    transition: 0.3s ease;
+[data-testid="stAppViewContainer"] {
+    background: linear-gradient(180deg, #0b1d0b 0%, #152515 80%, #1a2a1a 100%);
+    color: #e0e0e0;
 }
-.green-card:hover {
-    background-color: #ddf0e3;
-    box-shadow: 0px 5px 22px rgba(0, 128, 0, 0.20);
+[data-testid="stHeader"] {
+    background: rgba(0,0,0,0) !important;
+}
+.green-card {
+    background-color: #1f3a1f !important;
+    color: #e0e0e0 !important;
+    box-shadow: 0px 4px 18px rgba(0, 255, 128, 0.2);
 }
 .section-title {
-    font-size: 30px;
-    margin-bottom: 12px;
+    color: #a0ffa0 !important;
+}
+h1, h2, h3, h4, h5, h6, p, label {
+    color: #e0e0e0 !important;
+}
+hr {
+    border-color: #3a6b3a;
+}
+.stButton>button {
+    background-color: #2a6b2a;
+    color: #e0e0e0;
+}
+.stButton>button:hover {
+    background-color: #1f4f1f;
 }
 </style>
 """, unsafe_allow_html=True)
