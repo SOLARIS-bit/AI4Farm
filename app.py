@@ -300,7 +300,7 @@ if st.button("🌾 " + T("Analyze Soil","Analyser le sol")):
     # ----------------------------------
     # 📄 PDF EXPORT (FIXED FOR UNICODE)
     # ----------------------------------
-    def remove_non_ascii(txt)
+    def remove_non_ascii(txt):
         return re.sub(r"[^\x00-\x7F]+","",txt)
 
     def generate_pdf_bytes(score, risk, moisture_status, organic_status, rain_status, lat="", lon=""):
